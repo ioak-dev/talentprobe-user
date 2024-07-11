@@ -1,31 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import logoWhite from '@/svg/logo-no-background.svg';
+import logoBlack from '@/svg/logo-black.svg';
 import { DarkModeState } from '@/store/ProfileStore';
+import { redirect, useRouter } from "next/navigation";
 
 interface Props {
+  black?: boolean;
 }
 
 const Logo = (props: Props) => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    DarkModeState.subscribe((message) => {
-      setDarkMode(message);
-    });
-    console.log(logoWhite)
-  }, []);
+  const router = useRouter();
 
   return (
     <div className="logo">
-      {/* <div className="logo--image">
-        {!darkMode && (
-          <img src={logoWhite.src} alt="Talentprobe logo" />
+      <div className="logo--image">
+        {!props.black && (
+          <img src={logoWhite.src} alt="Talentprobe logo" onClick={() => router.push('/home')}/>
         )}
-        {darkMode && (
-          <img src={logoWhite.src} alt="Talentprobe logo" />
+        {props.black && (
+          <img src={logoBlack.src} alt="Talentprobe logo" onClick={() => router.push('/home')}/>
         )}
-      </div> */}
+      </div>
     </div>
   );
 };

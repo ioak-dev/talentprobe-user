@@ -20,6 +20,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   // useInitialization();
 
   const [darkMode, setDarkMode] = useState(false);
@@ -32,7 +33,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="basicui-light">
+      <body
+        className={`${inter.className} ${
+          darkMode ? "basicui-dark" : "basicui-light"
+        }`}
+      >
+        {/* <Navbar /> */}
         <main>{children}</main>
       </body>
     </html>

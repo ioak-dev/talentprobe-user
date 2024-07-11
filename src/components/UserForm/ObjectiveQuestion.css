@@ -1,0 +1,35 @@
+.objective-question,
+.objective-question__form,
+.objective-question__form__choices {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 6px;
+}
+
+.objective-question {
+  row-gap: 24px;
+}
+
+.objective-question__form {
+  row-gap: 12px;
+}
+
+.objective-question__form__choices {
+  justify-content: flex-start;
+}
+
+.objective-question__form__action {
+  display: flex;
+  justify-content: space-between;
+}
+
+.objective-question__form .basicui-radio {
+  border: 1px solid var(--theme-black-extended-700);
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.objective-question__form .basicui-radio--checked {
+  border: 1px solid var(--theme-primary-700);
+  background-color: var(--theme-primary-transparent-50);
+}

@@ -1,0 +1,10 @@
+.user-detail,.user-detail__form {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 12px;
+}
+
+.user-detail__action {
+  display: flex;
+  justify-content: space-between;
+}
