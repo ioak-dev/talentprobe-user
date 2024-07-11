@@ -1,7 +1,6 @@
 import "./style.css";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import ObjectiveQuestion from "./ObjectiveQuestion";
 import UserDetail from "./UserDetail";
 
 interface Props {}
@@ -43,7 +42,7 @@ const UserForm = (props: Props) => {
   return (
     <div className="user-form">
       {!responseId && <UserDetail />}
-      {responseId && <ObjectiveQuestion />}
+      {/* {responseId && <ObjectiveQuestion />} */}
     </div>
   );
 };

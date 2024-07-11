@@ -1,3 +1,11 @@
+.main-container{
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 6px;
+  width: 540px;
+  margin: auto;
+}
+
 .objective-question,
 .objective-question__form,
 .objective-question__form__choices {

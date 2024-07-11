@@ -1,3 +1,4 @@
+"use client";
 import {
   Button,
   ButtonVariantType,
@@ -12,7 +13,7 @@ import {
   ThemeType,
 } from "basicui";
 import cloneDeep from "lodash/cloneDeep";
-import "./ObjectiveQuestion.css";
+import "./style.css";
 import { useEffect, useState } from "react";
 import {
   faCheck,
@@ -61,6 +62,7 @@ const ObjectiveQuestion = (props: Props) => {
   };
 
   return (
+    <div className="main-container">
     <div className="objective-question">
       <div className="objective-question__form">
         <div>
@@ -84,6 +86,7 @@ const ObjectiveQuestion = (props: Props) => {
           Next
         </Button>
       </div>
+    </div>
     </div>
   );
 };
