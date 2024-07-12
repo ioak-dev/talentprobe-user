@@ -25,11 +25,32 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { checkResponse, submitAnswer } from "./service";
+import { ObjectiveQuestionResponse } from "@/types/ObjectiveQuestionResponse";
 
-interface Props {}
+interface Props {
+  response:any;
+}
 
 const ObjectiveQuestion = (props: Props) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [response,setResponse]=useState({
+    currentQuestionNumber:0,
+    responseId:'',
+    referenceId:'',
+    question:{choices:[],
+      question:'',
+      questionId:'',
+      type:''}
+  });
+  const [assessmentQuestion, setAssessmentQuestion]=useState({
+    choices:[],
+    question:'',
+    questionId:'',
+    type:''
+  });
+  const [selectedAnswer, setSelectedAnswer]=useState('');
+  const [assessmentId,setAssessmentId]=useState('667a79c9ec2bf94e9da6756c');
 
   const [state, setState] = useState<{
     question: string;
@@ -41,6 +62,12 @@ const ObjectiveQuestion = (props: Props) => {
     choices: [],
   });
 
+  useEffect(() => {
+    setResponse(props.response);
+      setAssessmentQuestion(props.response.question);
+   console.log(props.response)
+  }, [props.response]);
+
   const editQuestion = () => {};
 
   const handleQuestionChange = (event: any) => {
@@ -51,37 +78,50 @@ const ObjectiveQuestion = (props: Props) => {
   };
 
   const handleChoiceChange = (answer: string, index: number) => {
-    setState({
-      ...state,
-      answer,
-    });
+    setSelectedAnswer(answer)
   };
 
   const handleSave = () => {
     setIsEditDialogOpen(false);
   };
 
+  const onSubmitAnswer = () => {
+    const payload= {
+      referenceId:response?.referenceId,
+      answer:selectedAnswer,
+    }
+    submitAnswer(payload,assessmentId,response?.responseId).then((response: any) =>{
+      console.log(response);
+      setResponse(response);
+      setAssessmentQuestion(response.question);
+    })
+  }
+
   return (
     <div className="main-container">
     <div className="objective-question">
       <div className="objective-question__form">
         <div>
-          Hoping to patch things up between Johnny and Julia Linda visits the
-          Potters and finds them packing for a voyage to Europe. Seton later
-          offers Johnny a job at his bank and Johnny reveals his plans for a
-          holiday from work. Johnny leaves the mansion in a dark mood without
-          saying goodbye to the family although he wishes the kitchen staff a
-          Happy New Year as he goes.
+         {assessmentQuestion.question}
         </div>
         <div className="objective-question__form__choices">
-          <Radio label="Seeing her while in midhandspring" />
-          <Radio label="This makes Johnny realize that Julia and Edward Sr" checked />
-          <Radio label="Julia is certain that Johnny will give up his plans and return to her" />
+        {assessmentQuestion?.choices.map((item, index: number) => (
+                <div
+                  className="objective-question__choices__choice"
+                  key={index}
+                >
+                  <Radio
+                    value={item}
+                    onChange={() => handleChoiceChange(item, index)}
+                    label={item}
+                  />
+                </div>
+              ))}
         </div>
       </div>
       <div className="objective-question__form__action">
-        <div>2 of 10 questions</div>
-        <Button theme={ThemeType.primary}>
+        <div>{response.currentQuestionNumber} of 10 questions</div>
+        <Button theme={ThemeType.primary} onClick={()=> onSubmitAnswer()}>
           <FontAwesomeIcon icon={faChevronRight} />
           Next
         </Button>

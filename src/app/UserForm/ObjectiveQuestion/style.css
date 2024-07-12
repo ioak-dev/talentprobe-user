@@ -32,7 +32,7 @@
 }
 
 .objective-question__form .basicui-radio {
-  border: 1px solid var(--theme-black-extended-700);
+  /* border: 1px solid var(--theme-black-extended-700); */
   padding: 12px;
   border-radius: 4px;
 }

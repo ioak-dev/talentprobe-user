@@ -1,8 +1,8 @@
 import { httpGet, httpPost } from "@/lib/RestTemplate";
 
 
-export const saveAnswer = (payload: any,id:any, authorization?: any) => {
-  return httpPost(`/api/assessment/${id}/response`, payload, {
+export const checkResponse = (id:any, authorization?: any) => {
+  return httpPost(`/assessment/${id}/response`,null, {
     headers: {
       Authorization: authorization?.access_token,
     },
@@ -20,7 +20,7 @@ export const saveAnswer = (payload: any,id:any, authorization?: any) => {
 
 
 export const submitAnswer = (payload: any,id:any,responseId:any, authorization?: any) => {
-    return httpPost(`/api/assessment/${id}/response:${responseId}`, payload, {
+    return httpPost(`/assessment/${id}/response/${responseId}`, payload, {
       headers: {
         Authorization: authorization?.access_token,
       },
