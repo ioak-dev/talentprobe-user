@@ -111,6 +111,9 @@ const Assessment = (props: Props) => {
                   key={index}
                 >
                   <Radio
+                   checked={
+                    item === selectedAnswer
+                  }
                     value={item}
                     onChange={() => handleChoiceChange(item, index)}
                     label={item}
