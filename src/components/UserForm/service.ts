@@ -1,18 +1,18 @@
 import { httpGet, httpPost } from "@/lib/RestTemplate";
 
-export const checkResponse = (id: any, authorization?: any) => {
-  return httpPost(`/assessment/${id}/response`, null, {
+export const checkResponse = (id: any, payload: any, authorization?: any) => {
+  return httpPost(`/assessment/${id}/response`, payload, {
     headers: {
       Authorization: authorization?.access_token,
     },
   })
-    .then((response) => {
+    .then((response: any) => {
       if (response.status === 200) {
         return Promise.resolve(response.data);
       }
       return Promise.resolve({});
     })
-    .catch((error) => {
+    .catch((error: any) => {
       return Promise.resolve({});
     });
 };
@@ -32,13 +32,13 @@ export const submitAnswer = (
       },
     }
   )
-    .then((response) => {
+    .then((response: any) => {
       if (response.status === 200) {
         return Promise.resolve(response.data);
       }
       return Promise.resolve({});
     })
-    .catch((error) => {
+    .catch((error: any) => {
       return Promise.resolve({});
     });
 };

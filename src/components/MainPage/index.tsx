@@ -23,9 +23,9 @@ const MainPage = (props: Props) => {
   });
   const responseId = searchParams.get("response-id");
 
-  const saveUserDetails = () => {
+  const saveUserDetails = (userDetails: any) => {
     const assessmentId = params.assessmentid;
-    checkResponse(assessmentId).then((res: any) => {
+    checkResponse(assessmentId, userDetails).then((res: any) => {
       setCurrentQuestion(res);
       if (res.hasSubmitted) {
         setHasSubmitted(true);
@@ -39,7 +39,7 @@ const MainPage = (props: Props) => {
     submitAnswer(params.assessmentid, responseId || "", {
       referenceId: currentQuestion.referenceId,
       answer,
-    }).then((res) => {
+    }).then((res: any) => {
       setCurrentQuestion(res);
     });
   };
