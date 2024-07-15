@@ -5,7 +5,7 @@ export const validateResponseId = (
   responseId: string,
   authorization?: any
 ) => {
-  return httpGet(`/assessment/${id}/response/${responseId}`, {
+  return httpGet(`/assessment/${id}/response/${responseId}/reload`, {
     headers: {
       Authorization: authorization?.access_token,
     },
