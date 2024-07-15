@@ -9,8 +9,7 @@ interface Props {}
 
 const MainPage = (props: Props) => {
   return (
-    <div className="main-page">
-      <Logo />
+    <div className="main-page page-container">
       <UserForm />
     </div>
   );

@@ -26,12 +26,9 @@ const Navbar = () => {
     <nav className="navbar">
       <Logo />
       <ul>
-        <li>
+        {/* <li>
           <Link href="/assessment/list">Candidate Assessment</Link>
-        </li>
-        <li>
-          <Link href="/resume/list">Resume screener</Link>
-        </li>
+        </li> */}
       </ul>
       <div>
         {darkMode && (

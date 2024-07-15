@@ -38,7 +38,7 @@ export default function RootLayout({
           darkMode ? "basicui-dark" : "basicui-light"
         }`}
       >
-        {/* <Navbar /> */}
+        <Navbar />
         <main>{children}</main>
       </body>
     </html>
