@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 interface Props {
   currentQuestion: any;
   onSubmit: any;
+  loading: boolean;
 }
 
 const Assessment = (props: Props) => {
@@ -34,7 +35,7 @@ const Assessment = (props: Props) => {
     <div className="main-container">
       <div className="objective-question">
         <div className="objective-question__form">
-          <div>{props.currentQuestion.question?.question}</div>
+          {/* <div>{props.currentQuestion.question?.question}</div> */}
           <div className="objective-question__form__choices">
             {props.currentQuestion.question?.choices?.map(
               (item: any, index: number) => (
@@ -54,10 +55,8 @@ const Assessment = (props: Props) => {
           </div>
         </div>
         <div className="objective-question__form__action">
-          <div>
-            {props.currentQuestion.currentQuestionNumber} of {props.currentQuestion.totalQuestions} questions
-          </div>
-          <Button theme={ThemeType.primary} onClick={() => onSubmitAnswer()}>
+          <div />
+          <Button theme={ThemeType.primary} onClick={() => onSubmitAnswer()} loading={props.loading}>
             <FontAwesomeIcon icon={faChevronRight} />
             Next
           </Button>

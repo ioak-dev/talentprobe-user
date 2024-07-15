@@ -14,6 +14,7 @@ const MainPage = (props: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const params = useParams<{ assessmentid: string }>();
+  const [loading, setLoading] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<any>({
     responseId: "",
     referenceId: "",
@@ -25,17 +26,21 @@ const MainPage = (props: Props) => {
 
   const saveUserDetails = (userDetails: any) => {
     const assessmentId = params.assessmentid;
+    setLoading(true);
     checkResponse(assessmentId, userDetails).then((res: any) => {
+      setLoading(false);
       router.push(`/${assessmentId}?response-id=${res.responseId}`);
     });
   };
 
   const onSubmitAnswer = (answer: string) => {
+    setLoading(true);
     submitAnswer(params.assessmentid, responseId || "", {
       referenceId: currentQuestion.referenceId,
       answer,
     }).then((res: any) => {
       setCurrentQuestion(res);
+      setLoading(false);
     });
   };
 
@@ -76,6 +81,7 @@ const MainPage = (props: Props) => {
               <Assessment
                 currentQuestion={currentQuestion}
                 onSubmit={onSubmitAnswer}
+                loading={loading}
               />
             )}
           </div>
