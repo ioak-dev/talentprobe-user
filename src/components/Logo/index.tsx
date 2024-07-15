@@ -30,7 +30,7 @@ const Logo = (props: Props) => {
         )}
         {!darkMode && (
           <img
-            src={logoBlack.src}
+            src={logoWhite.src}
             alt="Talentprobe logo"
             onClick={() => router.push("/")}
           />
