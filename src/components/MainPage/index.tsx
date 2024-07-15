@@ -6,6 +6,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import UserDetail from "../UserForm/UserDetail";
 import Assessment from "../UserForm/Assessment";
 import { checkResponse, submitAnswer } from "../UserForm/service";
+import { validateResponseId } from "./service";
 
 interface Props {}
 
@@ -13,7 +14,6 @@ const MainPage = (props: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const params = useParams<{ assessmentid: string }>();
-  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<any>({
     responseId: "",
     referenceId: "",
@@ -26,12 +26,7 @@ const MainPage = (props: Props) => {
   const saveUserDetails = (userDetails: any) => {
     const assessmentId = params.assessmentid;
     checkResponse(assessmentId, userDetails).then((res: any) => {
-      setCurrentQuestion(res);
-      if (res.hasSubmitted) {
-        setHasSubmitted(true);
-      } else {
-        router.push(`/${assessmentId}?response-id=${res.responseId}`);
-      }
+      router.push(`/${assessmentId}?response-id=${res.responseId}`);
     });
   };
 
@@ -43,6 +38,15 @@ const MainPage = (props: Props) => {
       setCurrentQuestion(res);
     });
   };
+
+  useEffect(() => {
+    console.log(responseId);
+    validateResponseId(params.assessmentid, responseId || "").then(
+      (response) => {
+        setCurrentQuestion(response);
+      }
+    );
+  }, [responseId]);
 
   return (
     <div className="main-page-container">
@@ -61,7 +65,7 @@ const MainPage = (props: Props) => {
                 {currentQuestion.totalQuestions}
               </b>
             </p>
-            <h3>{currentQuestion.question.question}</h3>
+            <h3>{currentQuestion.question?.question}</h3>
             <p>Select one answer</p>
           </div>
         )}
