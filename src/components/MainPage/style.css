@@ -10,7 +10,7 @@
   column-gap: 24px;
   /* margin-top: 42px; */
   background-color: var(--basicui-bg-accent);
-  border-radius: 36px;
+  border-radius: 12px;
   /* min-height: calc(100vh - 42px - 100px); */
   margin: auto;
   width: 980px;
@@ -29,7 +29,7 @@
   color: #007ba0;
   /* margin: 4px; */
   padding: 24px;
-  border-radius: 36px 0 0 36px;
+  border-radius: 12px 0 0 12px;
 }
 .basicui-dark .main-page__left {
   background-color: #417584;
