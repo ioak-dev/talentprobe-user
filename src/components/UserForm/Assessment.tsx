@@ -1,0 +1,70 @@
+"use client";
+import { Button, Radio, ThemeType } from "basicui";
+import "./Assessment.css";
+import { useEffect, useState } from "react";
+import { faCheck, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+interface Props {
+  currentQuestion: any;
+  onSubmit: any;
+}
+
+const Assessment = (props: Props) => {
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+
+  const handleChoiceChange = (answer: string, index: number) => {
+    setSelectedAnswer(answer);
+  };
+
+  const onSubmitAnswer = () => {
+    // const payload= {
+    //   referenceId:response?.referenceId,
+    //   answer:selectedAnswer,
+    // }
+    // submitAnswer(payload,assessmentId,response?.responseId).then((response: any) =>{
+    //   console.log(response);
+    //   setResponse(response);
+    //   setAssessmentQuestion(response.question);
+    // })
+    props.onSubmit(selectedAnswer);
+  };
+
+  return (
+    <div className="main-container">
+      <div className="objective-question">
+        <div className="objective-question__form">
+          <div>{props.currentQuestion.question.question}</div>
+          <div className="objective-question__form__choices">
+            {props.currentQuestion.question.choices?.map(
+              (item: any, index: number) => (
+                <div
+                  className="objective-question__choices__choice"
+                  key={index}
+                >
+                  <Radio
+                    checked={item === selectedAnswer}
+                    value={item}
+                    onChange={() => handleChoiceChange(item, index)}
+                    label={item}
+                  />
+                </div>
+              )
+            )}
+          </div>
+        </div>
+        <div className="objective-question__form__action">
+          <div>
+            {props.currentQuestion.currentQuestionNumber} of {props.currentQuestion.totalQuestions} questions
+          </div>
+          <Button theme={ThemeType.primary} onClick={() => onSubmitAnswer()}>
+            <FontAwesomeIcon icon={faChevronRight} />
+            Next
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Assessment;

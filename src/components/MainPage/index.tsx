@@ -2,23 +2,78 @@
 
 import React, { useEffect, useState } from "react";
 import "./style.css";
-import Logo from "../Logo";
-import UserForm from "../../app/UserForm";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import UserDetail from "../UserForm/UserDetail";
+import Assessment from "../UserForm/Assessment";
+import { checkResponse, submitAnswer } from "../UserForm/service";
 
 interface Props {}
 
 const MainPage = (props: Props) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const params = useParams<{ assessmentid: string }>();
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState<any>({
+    responseId: "",
+    referenceId: "",
+    question: {},
+    currentQuestionNumber: 0,
+    totalQuestions: 0,
+  });
+  const responseId = searchParams.get("response-id");
+
+  const saveUserDetails = () => {
+    const assessmentId = params.assessmentid;
+    checkResponse(assessmentId).then((res: any) => {
+      setCurrentQuestion(res);
+      if (res.hasSubmitted) {
+        setHasSubmitted(true);
+      } else {
+        router.push(`/${assessmentId}?response-id=${res.responseId}`);
+      }
+    });
+  };
+
+  const onSubmitAnswer = (answer: string) => {
+    submitAnswer(params.assessmentid, responseId || "", {
+      referenceId: currentQuestion.referenceId,
+      answer,
+    }).then((res) => {
+      setCurrentQuestion(res);
+    });
+  };
+
   return (
     <div className="main-page-container">
       <div className="main-page">
-        <div className="main-page__left">
-        <p><b>Question 1 of 10</b></p>
-          <h2>Fill in your details to start the assessment</h2>
-          <p>Select one answer</p>
-        </div>
+        {!responseId && (
+          <div className="main-page__left">
+            <h2>Fill in your details to start the assessment</h2>
+            <p>All the best</p>
+          </div>
+        )}
+        {responseId && (
+          <div className="main-page__left">
+            <p>
+              <b>
+                Question {currentQuestion.currentQuestionNumber} of{" "}
+                {currentQuestion.totalQuestions}
+              </b>
+            </p>
+            <h3>{currentQuestion.question.question}</h3>
+            <p>Select one answer</p>
+          </div>
+        )}
         <div className="main-page__right">
           <div>
-          <UserForm />
+            {!responseId && <UserDetail saveUserDetails={saveUserDetails} />}
+            {responseId && (
+              <Assessment
+                currentQuestion={currentQuestion}
+                onSubmit={onSubmitAnswer}
+              />
+            )}
           </div>
         </div>
       </div>
