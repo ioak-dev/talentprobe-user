@@ -7,6 +7,9 @@ import UserDetail from "../UserForm/UserDetail";
 import Assessment from "../UserForm/Assessment";
 import { checkResponse, submitAnswer } from "../UserForm/service";
 import { validateResponseId } from "./service";
+import AssessmentSubmitted from "../UserForm/AssessmentSubmitted";
+import { faFaceSmile } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Props {}
 
@@ -57,7 +60,7 @@ const MainPage = (props: Props) => {
             <p>All the best</p>
           </div>
         )}
-        {responseId && (
+        {responseId && !currentQuestion?.hasSubmitted && (
           <div className="main-page__left">
             <p>
               <b>
@@ -69,6 +72,11 @@ const MainPage = (props: Props) => {
             <p>Select one answer</p>
           </div>
         )}
+        {responseId && currentQuestion?.hasSubmitted && (
+               <div className="main-page__left">
+                 <div className="main-page__icon" > <FontAwesomeIcon icon={faFaceSmile} /></div>
+               </div>
+            )}
         <div className="main-page__right">
           <div>
             {!responseId && <UserDetail saveUserDetails={saveUserDetails} />}
@@ -77,6 +85,9 @@ const MainPage = (props: Props) => {
                 currentQuestion={currentQuestion}
                 onSubmit={onSubmitAnswer}
               />
+            )}
+            {responseId && currentQuestion?.hasSubmitted && (
+              <AssessmentSubmitted></AssessmentSubmitted>
             )}
           </div>
         </div>

@@ -38,3 +38,12 @@
 .main-page__right {
   padding: 24px;
 }
+
+.main-page__icon{
+  text-align: center;
+}
+
+.main-page__icon svg{
+  height: 100px;
+  width: 100px;
+}
