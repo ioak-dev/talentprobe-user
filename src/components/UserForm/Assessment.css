@@ -2,7 +2,7 @@
   display: grid;
   grid-auto-flow: row;
   row-gap: 6px;
-  width: 540px;
+  max-width: 540px;
   margin: auto;
 }
 
