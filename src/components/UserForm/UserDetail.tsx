@@ -20,9 +20,13 @@ const UserDetail = (props: Props) => {
 
   const handleUserDetailsChange = (event: any) => {
     const { name, value } = event.target;
+    let UpdatedValue = value;
+    if (name === 'email') {
+      UpdatedValue = value.trim().toLowerCase();
+    }
     setUserDetails({
       ...userDetails,
-      [name]: value,
+      [name]: UpdatedValue,
     });
   };
 
@@ -55,6 +59,7 @@ const UserDetail = (props: Props) => {
             <Button
               theme={ThemeType.primary}
               onClick={() => props.saveUserDetails(userDetails)}
+              disabled={!userDetails.email || !userDetails.firstName || !userDetails.lastName}
             >
               <FontAwesomeIcon icon={faChevronRight} />
               Proceed

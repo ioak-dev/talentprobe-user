@@ -34,9 +34,9 @@ const Assessment = (props: Props) => {
     <div className="main-container">
       <div className="objective-question">
         <div className="objective-question__form">
-          <div>{props.currentQuestion.question.question}</div>
+          <div>{props.currentQuestion.question?.question}</div>
           <div className="objective-question__form__choices">
-            {props.currentQuestion.question.choices?.map(
+            {props.currentQuestion.question?.choices?.map(
               (item: any, index: number) => (
                 <div
                   className="objective-question__choices__choice"
