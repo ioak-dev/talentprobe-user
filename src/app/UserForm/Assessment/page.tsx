@@ -32,7 +32,7 @@ interface Props {
   response:any;
 }
 
-const ObjectiveQuestion = (props: Props) => {
+const Assessment = (props: Props) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [response,setResponse]=useState({
     currentQuestionNumber:0,
@@ -111,6 +111,9 @@ const ObjectiveQuestion = (props: Props) => {
                   key={index}
                 >
                   <Radio
+                   checked={
+                    item === selectedAnswer
+                  }
                     value={item}
                     onChange={() => handleChoiceChange(item, index)}
                     label={item}
@@ -131,4 +134,4 @@ const ObjectiveQuestion = (props: Props) => {
   );
 };
 
-export default ObjectiveQuestion;
+export default Assessment;
