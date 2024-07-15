@@ -2,8 +2,8 @@ import "./style.css";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import UserDetail from "./UserDetail";
-import ObjectiveQuestion from "./ObjectiveQuestion/page"
-import { checkResponse } from "./ObjectiveQuestion/service";
+import Assessment from "./Assessment/page"
+import { checkResponse } from "./Assessment/service";
 import { useRouter } from "next/navigation";
 
 interface Props {}
@@ -69,7 +69,7 @@ const UserForm = (props: Props) => {
   return (
     <div className="user-form">
       {!responseId && <UserDetail saveUserDetails={saveUserDetails} />}
-      {responseId && <ObjectiveQuestion response={response}/>}
+      {responseId && <Assessment response={response}/>}
     </div>
   );
 };

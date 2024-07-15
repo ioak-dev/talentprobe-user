@@ -26,7 +26,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { checkResponse } from "./ObjectiveQuestion/service";
+import { checkResponse } from "./Assessment/service";
 
 interface Props {
   saveUserDetails:any;

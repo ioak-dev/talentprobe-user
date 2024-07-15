@@ -32,7 +32,7 @@ interface Props {
   response:any;
 }
 
-const ObjectiveQuestion = (props: Props) => {
+const Assessment = (props: Props) => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [response,setResponse]=useState({
     currentQuestionNumber:0,
@@ -131,4 +131,4 @@ const ObjectiveQuestion = (props: Props) => {
   );
 };
 
-export default ObjectiveQuestion;
+export default Assessment;
