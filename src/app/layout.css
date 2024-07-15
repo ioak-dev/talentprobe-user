@@ -1,5 +1,5 @@
 main {
-  margin-top: calc(42px + 24px);
+  margin-top: calc(42px);
   min-height: calc(100vh - 42px);
 }
 

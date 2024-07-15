@@ -12,12 +12,12 @@
   justify-items: flex-start;
   padding: 0 12px;
   z-index: 10;
-  border-bottom: 1px solid var(--theme-white-700);
+   /* border-bottom: 1px solid var(--theme-white-700); */
 }
 
 .basicui-dark .navbar { 
   /* background-color: var(--theme-black-400); */
-  border-bottom: 1px solid var(--theme-black-100);
+  /* border-bottom: 1px solid var(--theme-black-100); */
 }
 
 .navbar ul {

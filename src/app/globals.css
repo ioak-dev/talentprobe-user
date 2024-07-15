@@ -5,7 +5,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
 
 @import "../../node_modules/basicui/styles/index.css";
 @import "../../node_modules/authlite-form-widgets/styles/index.css";
@@ -15,7 +15,7 @@
   --app-layout-sidebar-width-shrinked: 75px;
   --app-layout-topbar-height: 42px;
   /* font-family: Roboto; */
-  }
+}
 
 * {
   font-family: Work Sans, sans-serif;
@@ -28,6 +28,10 @@ body {
   margin: 0;
   background-color: var(--basicui-bg-base);
   color: var(--basicui-fg);
+  background-image: url(https://images.unsplash.com/photo-1718194822494-47de8fb7922c?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-image: url(https://images.unsplash.com/photo-1505159940484-eb2b9f2588e2?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);;
+  background-position: 50%;
+  background-repeat: no-repeat;
 }
 body.oak-dialog-open {
   overflow-y: hidden;
@@ -199,7 +203,6 @@ code {
 .basicui-textarea textarea {
   height: 80px;
 }
-
 
 .basicui-button svg {
   height: calc(var(--basicui-button-height) - 20px) !important;
