@@ -72,7 +72,7 @@ const MainPage = (props: Props) => {
         <div className="main-page__right">
           <div>
             {!responseId && <UserDetail saveUserDetails={saveUserDetails} />}
-            {responseId && (
+            {responseId && currentQuestion?.question && (
               <Assessment
                 currentQuestion={currentQuestion}
                 onSubmit={onSubmitAnswer}
