@@ -73,7 +73,7 @@ const MainPage = (props: Props) => {
                 {currentQuestion.totalQuestions}
               </b>
             </p>
-            <h3>{currentQuestion.question?.question}</h3>
+            <h4><pre>{currentQuestion.question?.question}</pre></h4>
             <p>Select one answer</p>
           </div>
         )}

@@ -18,12 +18,13 @@
   min-height: calc(100vh - 42px - 42px - 42px);
 }
 
-.main-page__left ,.main-page__right{
-    display: grid;
-    width: 100%;
-    align-content: center;
-  }
-  
+.main-page__left,
+.main-page__right {
+  display: grid;
+  width: 100%;
+  align-content: center;
+}
+
 .main-page__left {
   background-color: #e1f8fe;
   color: #007ba0;
@@ -39,11 +40,17 @@
   padding: 24px;
 }
 
-.main-page__icon{
+.main-page__icon {
   text-align: center;
 }
 
-.main-page__icon svg{
+.main-page__icon svg {
   height: 100px;
   width: 100px;
+}
+
+.main-page__left pre {
+  word-break: break-word;
+  white-space: break-spaces;
+  margin: 0;
 }

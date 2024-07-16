@@ -4,6 +4,7 @@ import "./Assessment.css";
 import { useEffect, useState } from "react";
 import { faCheck, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Timer from "../Timer/index";
 
 interface Props {
   currentQuestion: any;
@@ -13,6 +14,11 @@ interface Props {
 
 const Assessment = (props: Props) => {
   const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [isResetTimer, setIsResetTimer] = useState(false);
+
+  useEffect(() => {
+    setIsResetTimer(false);
+  }, [props.currentQuestion]);
 
   const handleChoiceChange = (answer: string, index: number) => {
     setSelectedAnswer(answer);
@@ -29,6 +35,12 @@ const Assessment = (props: Props) => {
     //   setAssessmentQuestion(response.question);
     // })
     props.onSubmit(selectedAnswer);
+    setIsResetTimer(true);
+  };
+
+  const handleTimerEnd = () => {
+    console.log("Timer has ended!");
+    onSubmitAnswer();
   };
 
   return (
@@ -55,8 +67,12 @@ const Assessment = (props: Props) => {
           </div>
         </div>
         <div className="objective-question__form__action">
-          <div />
-          <Button theme={ThemeType.primary} onClick={() => onSubmitAnswer()} loading={props.loading}>
+          <Timer onTimerEnd={handleTimerEnd} resetTimer={isResetTimer} />
+          <Button
+            theme={ThemeType.primary}
+            onClick={() => onSubmitAnswer()}
+            loading={props.loading}
+          >
             <FontAwesomeIcon icon={faChevronRight} />
             Next
           </Button>
