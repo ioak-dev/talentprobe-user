@@ -14,8 +14,8 @@ const UserDetail = (props: Props) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [userDetails, setUserDetails] = useState({
     email: "",
-    firstName: "",
-    lastName: "",
+    givenName: "",
+    familyName: "",
   });
 
   const handleUserDetailsChange = (event: any) => {
@@ -42,15 +42,15 @@ const UserDetail = (props: Props) => {
               onChange={handleUserDetailsChange}
             />
             <Input
-              label="First name"
-              name="firstName"
-              value={userDetails.firstName}
+              label="Given name"
+              name="givenName"
+              value={userDetails.givenName}
               onChange={handleUserDetailsChange}
             />
             <Input
-              label="Last name"
-              name="lastName"
-              value={userDetails.lastName}
+              label="Family name"
+              name="familyName"
+              value={userDetails.familyName}
               onChange={handleUserDetailsChange}
             />
           </div>
@@ -59,7 +59,7 @@ const UserDetail = (props: Props) => {
             <Button
               theme={ThemeType.primary}
               onClick={() => props.saveUserDetails(userDetails)}
-              disabled={!userDetails.email || !userDetails.firstName || !userDetails.lastName}
+              disabled={!userDetails.email || !userDetails.givenName || !userDetails.familyName}
             >
               <FontAwesomeIcon icon={faChevronRight} />
               Proceed
