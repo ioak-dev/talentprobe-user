@@ -17,17 +17,33 @@ const UserDetail = (props: Props) => {
     givenName: "",
     familyName: "",
   });
+  const [isEmailValid, setIsEmailValid] = useState(true);
 
   const handleUserDetailsChange = (event: any) => {
     const { name, value } = event.target;
     let UpdatedValue = value;
-    if (name === 'email') {
+    if (name === "email") {
+      setIsEmailValid(true);
       UpdatedValue = value.trim().toLowerCase();
+      validateEmail(value);
     }
     setUserDetails({
       ...userDetails,
       [name]: UpdatedValue,
     });
+  };
+
+  const OnSubmitDetails = () => {
+    if (validateEmail(userDetails.email)) {
+      props.saveUserDetails(userDetails);
+    } else {
+      setIsEmailValid(false);
+    }
+  };
+
+  const validateEmail = (email: any) => {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
   };
 
   return (
@@ -40,7 +56,9 @@ const UserDetail = (props: Props) => {
               name="email"
               value={userDetails.email}
               onChange={handleUserDetailsChange}
+              tooltip={isEmailValid ? "" : "E-mail not valid"}
             />
+            {/* {!isEmailValid && <p className="email_invalid">E-mail not valid</p>} */}
             <Input
               label="Given name"
               name="givenName"
@@ -58,8 +76,12 @@ const UserDetail = (props: Props) => {
             <div />
             <Button
               theme={ThemeType.primary}
-              onClick={() => props.saveUserDetails(userDetails)}
-              disabled={!userDetails.email || !userDetails.givenName || !userDetails.familyName}
+              onClick={() => OnSubmitDetails()}
+              disabled={
+                !userDetails.email ||
+                !userDetails.givenName ||
+                !userDetails.familyName
+              }
             >
               <FontAwesomeIcon icon={faChevronRight} />
               Proceed

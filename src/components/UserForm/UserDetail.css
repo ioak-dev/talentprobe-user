@@ -14,3 +14,6 @@
   justify-content: center;
 }
 
+.user-detail__form .basicui-form-element-info{
+  color: red;
+}

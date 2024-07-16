@@ -72,6 +72,7 @@ const Assessment = (props: Props) => {
             theme={ThemeType.primary}
             onClick={() => onSubmitAnswer()}
             loading={props.loading}
+            disabled={!selectedAnswer}
           >
             <FontAwesomeIcon icon={faChevronRight} />
             Next
