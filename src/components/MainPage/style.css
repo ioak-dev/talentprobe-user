@@ -15,7 +15,18 @@
   margin: auto;
   width: 980px;
   max-width: calc(100vw - 42px);
-  min-height: calc(100vh - 42px - 42px - 42px);
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .main-page {
+    min-height: calc(100vh - 42px - 42px - 42px);
+  }
+}
+@media (max-width: 767px) {
+  .main-page {
+    grid-template-columns: 1fr;
+  }
 }
 
 .main-page__left,
@@ -26,15 +37,14 @@
 }
 
 .main-page__left {
-  background-color: #e1f8fe;
-  color: #007ba0;
-  /* margin: 4px; */
+  background-color: #EDCB96;
+  color: #000;
   padding: 24px;
-  border-radius: 12px 0 0 12px;
+  border-radius: 12px;
 }
 .basicui-dark .main-page__left {
-  background-color: #417584;
-  color: #ffffff;
+  background-color: #EDCB96;
+  color: #000;
 }
 .main-page__right {
   padding: 24px;
