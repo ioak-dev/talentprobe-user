@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   faClock,
   faHourglassEnd,
@@ -16,17 +16,25 @@ const Timer = (props: Props) => {
   const [timeLeft, setTimeLeft] = useState(60);
 
   useEffect(() => {
-    if (timeLeft === 0) {
-      props.onTimerEnd();
-      return;
-    }
+    const endTime = new Date().getTime() + timeLeft * 1000;
 
-    const intervalId = setInterval(() => {
-      setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-    }, 1000);
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const difference = endTime - now;
+      const secondsLeft = Math.max(0, Math.floor(difference / 1000));
+      setTimeLeft(secondsLeft);
+
+      if (secondsLeft === 0) {
+        clearInterval(intervalId);
+        props.onTimerEnd();
+        return;
+      }
+    };
+
+    const intervalId = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(intervalId);
-  }, [timeLeft, props.onTimerEnd]);
+  }, [props.onTimerEnd]);
 
   const resetCountDown = () => {
     setTimeLeft(60);
@@ -39,9 +47,12 @@ const Timer = (props: Props) => {
   }, [props.resetTimer]);
 
   return (
-    <div className="timer-display">
-      <FontAwesomeIcon icon={faStopwatch} />
-      <p>{timeLeft}s</p>
+    <div className={`timer-display ${timeLeft <= 15 ? "change-bg-color" : ""}`}>
+      <FontAwesomeIcon
+        className={`${timeLeft <= 15 ? "blink timer-end" : ""}`}
+        icon={faStopwatch}
+      />
+      <p className={`${timeLeft <= 15 ? "timer-end" : ""}`}>{timeLeft}s</p>
     </div>
   );
 };

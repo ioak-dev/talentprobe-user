@@ -8,14 +8,32 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
+  height: 32px;
 }
 
 .timer-display p {
   margin: 0;
 }
 
-.timer-display svg{
-    height: 20px;
-    width: 20px;
-    color: var(--theme-primary-700);
+.timer-display svg {
+  height: 20px;
+  width: 20px;
+  color: var(--theme-primary-700);
+}
+
+.timer-display .timer-end {
+  color: var(--theme-danger-800);
+}
+
+.change-bg-color {
+  background-color: #a3112024;
+}
+
+.blink {
+  animation: blinker 1s step-end infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }

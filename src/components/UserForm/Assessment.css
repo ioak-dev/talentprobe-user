@@ -29,7 +29,7 @@
 .objective-question__form__action {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 }
 
 .objective-question__form .basicui-radio {
