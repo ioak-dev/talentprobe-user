@@ -1,7 +1,16 @@
-import { Button, Input, ThemeType } from "basicui";
+import {
+  Button,
+  Input,
+  ThemeType,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalFooter,
+  IconButton,
+} from "basicui";
 import "./UserDetail.css";
 import { useEffect, useState } from "react";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 
@@ -18,6 +27,7 @@ const UserDetail = (props: Props) => {
     familyName: "",
   });
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isRulesDialogOpen, setIsRulesDialogOpen] = useState(false);
 
   const handleUserDetailsChange = (event: any) => {
     const { name, value } = event.target;
@@ -33,12 +43,16 @@ const UserDetail = (props: Props) => {
     });
   };
 
-  const OnSubmitDetails = () => {
+  const openInfoDialog = () => {
     if (validateEmail(userDetails.email)) {
-      props.saveUserDetails(userDetails);
+      setIsRulesDialogOpen(true);
     } else {
       setIsEmailValid(false);
     }
+  };
+
+  const onSubmitDetails = () => {
+    props.saveUserDetails(userDetails);
   };
 
   const validateEmail = (email: any) => {
@@ -76,7 +90,7 @@ const UserDetail = (props: Props) => {
             <div />
             <Button
               theme={ThemeType.primary}
-              onClick={() => OnSubmitDetails()}
+              onClick={() => openInfoDialog()}
               disabled={
                 !userDetails.email ||
                 !userDetails.givenName ||
@@ -94,6 +108,53 @@ const UserDetail = (props: Props) => {
           <p>Your response has been already submitted.</p>
         </div>
       )}
+      <Modal
+        isOpen={isRulesDialogOpen}
+        onClose={() => setIsRulesDialogOpen(false)}
+      >
+        <ModalHeader
+          heading="Attention"
+          onClose={() => setIsRulesDialogOpen(false)}
+        />
+        <ModalBody>
+          <div className="info_box">
+            {/* <div className="info-title">
+              <span>Some Rules of this Quiz</span>
+            </div> */}
+            <div className="info-list">
+              <div className="info">
+                1. Each question should be answered within the time indicated in
+                the counter.
+              </div>
+              <div className="info">
+                2. Once the time runs out, the last selected answer will be
+                saved.
+              </div>
+              <div className="info">
+                3. If no answer is selected, you will not receive any score for
+                that question.
+              </div>
+              <div className="info">
+                4. You can't exit from the assessment in the middle.
+              </div>
+              <div className="info">
+                5. You'll get points on the basis of your correct answers.
+              </div>
+              <div className="info">
+                6. No negative marks for incorrect answers.
+              </div>
+            </div>
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button theme={ThemeType.primary} onClick={() => onSubmitDetails()}>
+            Continue
+          </Button>
+          <IconButton onClick={() => setIsRulesDialogOpen(false)}>
+            <FontAwesomeIcon icon={faClose} />
+          </IconButton>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 };
