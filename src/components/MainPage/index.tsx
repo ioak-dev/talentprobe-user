@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./style.css";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import UserDetail from "../UserForm/UserDetail";
@@ -10,6 +10,7 @@ import { validateResponseId } from "./service";
 import AssessmentSubmitted from "../UserForm/AssessmentSubmitted";
 import { faFaceSmile } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Camera } from "react-camera-pro";
 
 interface Props {}
 
@@ -26,17 +27,25 @@ const MainPage = (props: Props) => {
     totalQuestions: 0,
   });
   const responseId = searchParams.get("response-id");
+  const camera = useRef<any>(null);
+  const [image, setImage] = useState("");
+  const [showCamera, setShowCamera] = useState(false);
 
   const saveUserDetails = (userDetails: any) => {
+    setShowCamera(true);
     const assessmentId = params.assessmentid;
     setLoading(true);
     checkResponse(assessmentId, userDetails).then((res: any) => {
       setLoading(false);
       router.push(`/${assessmentId}?response-id=${res.responseId}`);
+      captureImage();
     });
   };
 
   const onSubmitAnswer = (answer: string) => {
+    if (currentQuestion.currentQuestionNumber % 5 === 0) {
+      captureImage();
+    }
     setLoading(true);
     submitAnswer(params.assessmentid, responseId || "", {
       referenceId: currentQuestion.referenceId,
@@ -52,12 +61,24 @@ const MainPage = (props: Props) => {
     validateResponseId(params.assessmentid, responseId || "").then(
       (response) => {
         setCurrentQuestion(response);
+        setShowCamera(true);
       }
     );
   }, [responseId]);
 
+  const captureImage = () => {
+    setTimeout(() => {
+      const imageSrc = camera.current.takePhoto();
+      setImage(imageSrc);
+      console.log(imageSrc);
+    }, 5000);
+  };
+
   return (
     <div className="main-page-container">
+      <div className="camera-container">
+        {showCamera && <Camera ref={camera} />}
+      </div>
       <div className="main-page">
         {!responseId && (
           <div className="main-page__left">

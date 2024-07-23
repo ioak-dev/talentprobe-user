@@ -143,6 +143,9 @@ const UserDetail = (props: Props) => {
               <div className="info">
                 6. No negative marks for incorrect answers.
               </div>
+              <div className="info">
+                7. Allow access to browser camera.
+              </div>
             </div>
           </div>
         </ModalBody>
