@@ -135,10 +135,10 @@ const UserDetail = (props: Props) => {
                 that question.
               </div>
               <div className="info">
-                4. You can't exit from the assessment in the middle.
+                4. You can&apos;t exit from the assessment in the middle.
               </div>
               <div className="info">
-                5. You'll get points on the basis of your correct answers.
+                5. You&apos;ll get points on the basis of your correct answers.
               </div>
               <div className="info">
                 6. No negative marks for incorrect answers.
