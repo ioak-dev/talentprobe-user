@@ -64,3 +64,11 @@
   white-space: break-spaces;
   margin: 0;
 }
+
+#video, .camera-container{
+  height: 0px;
+}
+
+.cNjdVN{
+  z-index: -99;
+}

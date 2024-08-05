@@ -1,4 +1,5 @@
-.user-detail,.user-detail__form {
+.user-detail,
+.user-detail__form {
   display: grid;
   grid-auto-flow: row;
   row-gap: 12px;
@@ -9,11 +10,36 @@
   justify-content: space-between;
 }
 
-.submitted-response{
+.submitted-response {
   display: flex;
   justify-content: center;
 }
 
-.user-detail__form .basicui-form-element-info{
+.user-detail__form .basicui-form-element-info {
   color: red;
+}
+
+.info_box {
+  background: #fff;
+  border-radius: 5px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.basicui-modal-header__heading {
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  border-radius: 5px 5px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.info_box .info-list {
+  padding: 0 30px;
+}
+
+.info_box .info-list .info {
+  margin: 5px 0;
+  font-size: 17px;
 }
