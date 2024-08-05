@@ -76,9 +76,9 @@ const MainPage = (props: Props) => {
 
   return (
     <div className="main-page-container">
-      <div className="camera-container">
+      {/* <div className="camera-container">
         {showCamera && <Camera ref={camera} />}
-      </div>
+      </div> */}
       <div className="main-page">
         {!responseId && (
           <div className="main-page__left">
