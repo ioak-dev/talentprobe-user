@@ -10,7 +10,7 @@ import { validateResponseId } from "./service";
 import AssessmentSubmitted from "../UserForm/AssessmentSubmitted";
 import { faFaceSmile } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Camera } from "react-camera-pro";
+// import { Camera } from "react-camera-pro";
 
 interface Props {}
 
@@ -38,14 +38,14 @@ const MainPage = (props: Props) => {
     checkResponse(assessmentId, userDetails).then((res: any) => {
       setLoading(false);
       router.push(`/${assessmentId}?response-id=${res.responseId}`);
-      captureImage();
+      // captureImage();
     });
   };
 
   const onSubmitAnswer = (answer: string) => {
-    if (currentQuestion.currentQuestionNumber % 5 === 0) {
-      captureImage();
-    }
+    // if (currentQuestion.currentQuestionNumber % 5 === 0) {
+    //   captureImage();
+    // }
     setLoading(true);
     submitAnswer(params.assessmentid, responseId || "", {
       referenceId: currentQuestion.referenceId,
@@ -57,28 +57,29 @@ const MainPage = (props: Props) => {
   };
 
   useEffect(() => {
-    console.log(responseId);
-    validateResponseId(params.assessmentid, responseId || "").then(
-      (response) => {
+    if (responseId) { 
+      validateResponseId(params.assessmentid, responseId || "").then(
+        (response) => {
         setCurrentQuestion(response);
         setShowCamera(true);
-      }
-    );
+        }
+      );
+    }
   }, [responseId]);
 
-  const captureImage = () => {
-    setTimeout(() => {
-      const imageSrc = camera.current.takePhoto();
-      setImage(imageSrc);
-      console.log(imageSrc);
-    }, 5000);
-  };
+  // const captureImage = () => {
+  //   setTimeout(() => {
+  //     const imageSrc = camera.current.takePhoto();
+  //     setImage(imageSrc);
+  //     console.log(imageSrc);
+  //   }, 5000);
+  // };
 
   return (
     <div className="main-page-container">
-      <div className="camera-container">
+      {/* <div className="camera-container">
         {showCamera && <Camera ref={camera} />}
-      </div>
+      </div> */}
       <div className="main-page">
         {!responseId && (
           <div className="main-page__left">

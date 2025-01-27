@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { faCheck, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Timer from "../Timer/index";
+import { fetchResponse } from "./service";
+import { useParams } from "next/navigation";
 
 interface Props {
   currentQuestion: any;
@@ -15,32 +17,44 @@ interface Props {
 const Assessment = (props: Props) => {
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [isResetTimer, setIsResetTimer] = useState(false);
+  const [isTimerEnded, setIsTimerEnded] = useState(false);
+  const params = useParams<{ assessmentid: string }>();
+  const [assessmentData, setAssessmentData] = useState("");
+  const [duration, setDuration] = useState();
 
   useEffect(() => {
     setIsResetTimer(false);
+    setIsTimerEnded(false);
   }, [props.currentQuestion]);
+
+  useEffect(() => {
+    getAssessmentData();
+  }, []);
+
+  const getAssessmentData = () => {
+    fetchResponse(params.assessmentid || "").then(
+      (response: any) => {
+        setAssessmentData(response);
+        setDuration(response?.duration);
+      }
+    );
+  }
 
   const handleChoiceChange = (answer: string, index: number) => {
     setSelectedAnswer(answer);
   };
 
   const onSubmitAnswer = () => {
-    // const payload= {
-    //   referenceId:response?.referenceId,
-    //   answer:selectedAnswer,
-    // }
-    // submitAnswer(payload,assessmentId,response?.responseId).then((response: any) =>{
-    //   console.log(response);
-    //   setResponse(response);
-    //   setAssessmentQuestion(response.question);
-    // })
     props.onSubmit(selectedAnswer);
     setIsResetTimer(true);
+    setIsTimerEnded(false);
+    setSelectedAnswer('');
   };
 
   const handleTimerEnd = () => {
     console.log("Timer has ended!");
-    onSubmitAnswer();
+    setIsTimerEnded(true);
+    // onSubmitAnswer();
   };
 
   return (
@@ -60,6 +74,7 @@ const Assessment = (props: Props) => {
                     value={item}
                     onChange={() => handleChoiceChange(item, index)}
                     label={item}
+                    disabled={isTimerEnded}
                   />
                 </div>
               )
@@ -67,12 +82,12 @@ const Assessment = (props: Props) => {
           </div>
         </div>
         <div className="objective-question__form__action">
-          <Timer onTimerEnd={handleTimerEnd} resetTimer={isResetTimer} />
+          <Timer onTimerEnd={handleTimerEnd} resetTimer={isResetTimer} duration={duration} />
           <Button
             theme={ThemeType.primary}
             onClick={() => onSubmitAnswer()}
             loading={props.loading}
-            disabled={!selectedAnswer}
+            disabled={!selectedAnswer && !isTimerEnded}
           >
             <FontAwesomeIcon icon={faChevronRight} />
             Next

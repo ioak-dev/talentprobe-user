@@ -42,3 +42,12 @@
   border: 1px solid var(--theme-primary-700);
   background-color: var(--theme-primary-transparent-50);
 }
+
+input[type="radio"]:disabled:hover {
+  cursor: default; 
+  background-color: transparent;
+}
+
+input[type="radio"]:disabled + span {
+  cursor: default;
+}

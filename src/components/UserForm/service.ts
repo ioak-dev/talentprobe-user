@@ -42,3 +42,20 @@ export const submitAnswer = (
       return Promise.resolve({});
     });
 };
+
+export const fetchResponse = (assessmentId: string, authorization?: any) => {
+  return httpGet(`/assessment/${assessmentId}`, {
+    // headers: {
+    //   Authorization: authorization?.access_token,
+    // },
+  })
+    .then((response: any) => {
+      if (response.status === 200) {
+        return Promise.resolve(response.data);
+      }
+      return Promise.resolve({});
+    })
+    .catch((error: any) => {
+      return Promise.resolve({});
+    });
+};
