@@ -57,10 +57,13 @@ const Assessment = (props: Props) => {
     console.log("Timer has ended!");
     setIsTimerEnded(true);
     // onSubmitAnswer();
-    if(!selectedAnswer){
-      setButtonText('Skip')
-    }
   };
+
+  useEffect(() => {
+    if (isTimerEnded && !selectedAnswer) {
+      setButtonText('Skip');
+    }
+  }, [isTimerEnded, selectedAnswer]);
 
   return (
     <div className="main-container">

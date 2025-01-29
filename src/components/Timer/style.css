@@ -18,7 +18,7 @@
 .timer-display svg {
   height: 16px;
   width: 16px;
-  color: var(--theme-primary-700);
+  /* color: var(--theme-primary-700); */
 }
 
 .timer-display .timer-end {
@@ -36,4 +36,24 @@
   50% {
     opacity: 0;
   }
+}
+
+.default-bg {
+  background-color: #e1f5fe;
+  color: var(--theme-primary-700);
+}
+
+.warning-bg {
+  background-color: #ffd180;
+  color: #e65100;
+}
+
+.danger-bg {
+  background-color: #efdadd;
+  color: var(--theme-danger-800);
+}
+
+.timer-text {
+  margin: 0;
+  font-size: 12px;
 }

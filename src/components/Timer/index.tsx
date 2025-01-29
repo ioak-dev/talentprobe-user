@@ -32,8 +32,8 @@ const Timer = (props: Props) => {
 
     intervalId.current = setInterval(updateCountdown, 1000);
 
-    return () => clearInterval(intervalId.current); 
-  }, [props.duration]); 
+    return () => clearInterval(intervalId.current);
+  }, [props.duration]);
 
   useEffect(() => {
     if (props.resetTimer) {
@@ -44,14 +44,25 @@ const Timer = (props: Props) => {
     }
   }, [props.resetTimer]);
 
+  const percentageLeft = (timeLeft / props.duration) * 100;
+
+  let colorClass = "default-bg";
+  let blink = "";
+  if (percentageLeft > 50 && percentageLeft < 75) {
+    colorClass = "warning-bg";
+  } else if (percentageLeft <= 50) {
+    colorClass = "danger-bg";
+    blink = "blink";
+  }
+
   return (
-    <div className={`timer-display ${timeLeft <= 15 ? "change-bg-color" : ""}`}>
+    <div className={`timer-display ${colorClass}`}>
       <FontAwesomeIcon
-        className={`${timeLeft <= 15 ? "blink timer-end" : ""}`}
+        className={`timer-display ${colorClass} ${blink}`}
         icon={faStopwatch}
       />
-      {timeLeft > 0 && <p className={`${timeLeft <= 15 ? "timer-end" : ""}`}>{timeLeft} Seconds</p>}
-      {timeLeft == 0 && <p className={`${timeLeft <= 15 ? "timer-end" : ""}`}>Time up</p>}
+      {timeLeft > 0 && <p className="timer-text">{timeLeft} Seconds</p>}
+      {timeLeft === 0 && <p className="timer-text">Time up</p>}
     </div>
   );
 };
