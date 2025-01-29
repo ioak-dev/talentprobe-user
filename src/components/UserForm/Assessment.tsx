@@ -21,6 +21,7 @@ const Assessment = (props: Props) => {
   const params = useParams<{ assessmentid: string }>();
   const [assessmentData, setAssessmentData] = useState("");
   const [duration, setDuration] = useState();
+  const [buttonText, setButtonText] = useState('Next');
 
   useEffect(() => {
     setIsResetTimer(false);
@@ -49,12 +50,16 @@ const Assessment = (props: Props) => {
     setIsResetTimer(true);
     setIsTimerEnded(false);
     setSelectedAnswer('');
+    setButtonText('Next')
   };
 
   const handleTimerEnd = () => {
     console.log("Timer has ended!");
     setIsTimerEnded(true);
     // onSubmitAnswer();
+    if(!selectedAnswer){
+      setButtonText('Skip')
+    }
   };
 
   return (
@@ -90,7 +95,7 @@ const Assessment = (props: Props) => {
             disabled={!selectedAnswer && !isTimerEnded}
           >
             <FontAwesomeIcon icon={faChevronRight} />
-            Next
+            {buttonText}
           </Button>
         </div>
       </div>

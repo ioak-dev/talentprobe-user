@@ -50,7 +50,8 @@ const Timer = (props: Props) => {
         className={`${timeLeft <= 15 ? "blink timer-end" : ""}`}
         icon={faStopwatch}
       />
-      <p className={`${timeLeft <= 15 ? "timer-end" : ""}`}>{timeLeft}s</p>
+      {timeLeft > 0 && <p className={`${timeLeft <= 15 ? "timer-end" : ""}`}>{timeLeft} Seconds</p>}
+      {timeLeft == 0 && <p className={`${timeLeft <= 15 ? "timer-end" : ""}`}>Time up</p>}
     </div>
   );
 };
